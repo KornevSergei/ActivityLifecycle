@@ -1,8 +1,10 @@
 package com.example.activitylifecycle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,6 +19,15 @@ public class MainActivity extends AppCompatActivity {
 
         //связываем
         textView = findViewById(R.id.textView);
+
+
+        //проверяем если не текст не равен null то помещаем текст
+        if (savedInstanceState != null){
+            textView.setText(savedInstanceState.getString("textToBundle"));
+
+        }
+
+
         //смотрим в лог
         Log.d("Lifecycle method: ", "onCreate()");
         //добавляем текс к существующему
@@ -71,5 +82,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Lifecycle method: ", "onDestroy() ");
         //добавляем текс к существующему
         textView.append("onDestroy() " + "\n");
+    }
+
+    //переопределяем метод для сохранения информации при перевороте активити
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //исзвлекаем созраненный текст и вставляем в Бандл
+        outState.putString("textToBundle", textView.getText().toString());
+
+        //смотрим в лог
+        Log.d("onSaveInstanceState: ", "onSaveInstanceState() ");
+        //добавляем текс к существующему
+        textView.append("onSaveInstanceState() " + "\n");
     }
 }
