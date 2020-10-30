@@ -8,6 +8,9 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 
+
+
+//В данном сучае сохраняем данные только когда приложение запущено, после закрытия всё удаляется
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
